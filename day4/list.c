@@ -1,37 +1,34 @@
+/*
+Open a file, read every char and put it in a linked list.
+Then get all elements of the list and print them.
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "list.h"
 
 int main (void){
 
-    list *p, *root = NULL;
-    int i = 0;
+    FILE *f;
+    list *root = NULL;
+    int r;
     
-    for (i; i < 5; i++){ 
-	if(add(&root,i) == 0)
-	    printf("FAILED TO ADD!\n");
-	else
-	    printf("Added : %d\n", i); 
-	/*
-	if (get(&root,&i) != 0)
-	    printf("Got : %d\n", i);
-	else
-	    printf("No more entries\n");
-	*/
-    }
-    
-    for (p = root; p; p = p->n){
-	p->d *= 2;
-	printf("%d\n",p->d);
-    }
-    /*
-    i++;
+    f = fopen("file","r");
 
-    if (get(&root,&i) != 0)
-	printf("Got : %d\n", i);
-    else
-	printf("No more entries\n");
-    */
+    if(!f)
+	return 1;
+    
+    for (r = fgetc(f); r >= 0; r = fgetc(f)){
+	if (add(&root, r) != 0)
+	    continue;
+    }
+	
+    fclose(f);
+
+    while (get(&root,&r) != 0)
+	printf("%c\n",(char)r);
+    
+    return 1;
 
 }
 
