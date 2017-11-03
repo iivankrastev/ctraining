@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-int global;
+const int global = 69;
 
-void modify(int);
+void modify(void);
 
 int main(void){
 
-    modify(10);
+    modify();
     printf("%d\n",global);
 
     return 0;

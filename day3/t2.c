@@ -1,8 +1,10 @@
-extern int global;
+#include <stdio.h>
 
-static void modify(int val){
+extern const int global;
+
+void modify(void){
     
-    global = val;
-    
+    printf("%d\n",global);
+
     return;
 }
