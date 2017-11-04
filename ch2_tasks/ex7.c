@@ -18,10 +18,9 @@ unsigned char getbits(unsigned char x,
 
 int main (void){
     
-    unsigned char a = 0xB6u;
+    unsigned char a = 0xffu;
 
-    printf("%x\n",invert(a,5,4));
-    //printf("%x\n",getbits(a,4,4));
+    printf("%x\n",invert(a,6,7));
 
     return 0;
 }
@@ -29,15 +28,23 @@ int main (void){
 unsigned char invert (unsigned char x,
 		      unsigned char p,
 		      unsigned char n){
+ 
     unsigned char a, b, c, d, e, f, y, w, z;
-
-    w = x & (0xffu << (p + 1));
-    z = x & (0xffu >> (p - 1 + n));
     
-    a = x >> (p + 1 - n);
-    b = ~(0xffu << n);
-    c = a & b;
-    d = (~c) & b;
+    if (p < 0 || p > 7)			    /*if position is out of range*/
+	y = 'Z';
+
+    if (p < (n + 2))			    /*if desired bits are out of range*/
+	y = 'Z';
+
+
+    w = x & (0xffu << (p + 1));		    
+    z = x & (0xffu >> (8 - (p + 1) + n));  
+    
+    a = x >> (p + 1 - n);		    
+    b = ~(0xffu << n);			    
+    c = a & b;				    
+    d = (~c) & b;	
     e = d << (p + 1 - n);
 
     y = w | z | e;
@@ -45,9 +52,4 @@ unsigned char invert (unsigned char x,
     return y;
 }
 
-unsigned char getbits(unsigned char x,
-		      unsigned char p,
-		      unsigned char n){
 
-    return /*(x >> (p+1-n)) & ~*/(0xffu << n);
-}
