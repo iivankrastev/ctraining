@@ -1,3 +1,10 @@
+/*
+Exercise 1-21. Write a program entab that replaces strings of blanks by the
+minimum number of tabs and blanks to achieve the same spacing. Use the
+same tab stops as for detab . When either a tab or a single blank would suffice
+to reach a tab stop, which should be given preference?
+*/
+
 #include <stdio.h>
 
 #define TABW 8
@@ -23,8 +30,8 @@ int main(void)
 void entab(char s[]) {
 	int i;
 	int j;
-	int tp = -1; // position of current char in a tab range
-	int sp = -1; // start position of tailed space in a tab range, -1 means no tailed space
+	int tp = -1; 
+	int sp = -1; 
 	char c;
 	
 	for (i = 0, j = 0; (c = s[i]) != '\0'; i++, j++) {
@@ -40,10 +47,10 @@ void entab(char s[]) {
 		} else
 			sp = -1;
 
-		// reach a tab end
+		
 		if (tp == TABW - 1) {
-		// with tailed space
-			if (sp != -1) {
+		
+		    if (sp != -1) {
 				int spacew = TABW - sp;
 				j = j - spacew + 1;
 				s[j] = '-';
