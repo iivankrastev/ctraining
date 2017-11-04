@@ -8,21 +8,21 @@ int main(void) {
 	int len,max;
 	char line[MAXLINE],maxline[MAXLINE];
 
-	max =0;
+	max = 0;
 
-	while((len=mgetline(line,MAXLINE)) > 0)
+	while( (len=mgetline(line,MAXLINE) ) > 0 )
 	{
-		if(len > max)
-		{
+		if(len > max) {
 			max = len;
 			copy(maxline,line);
 		}
 	}
 
-	if(max>0)
+	printf("Max line is:\n");
+	if ( max > 0 )
 	printf("%s",maxline);
 }
-
+    
 
 int mgetline(char s[],int lim) {
 	int i,c;
@@ -46,6 +46,4 @@ void copy(char to[],char from[]) {
 	while((to[i]=from[i]) != '\0')
 	++i;
 }
-
-
-
+        
