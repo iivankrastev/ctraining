@@ -6,33 +6,22 @@ of bitcount .
 
 #include <stdio.h>
 
-int bitcount(unsigned x);
-char test(char a);
+int bitcount2 (unsigned int x);
 
 int main (void){
 
-    unsigned int x = 15;
-    char y = -15;
+    unsigned int a = 15;
    
-    printf ("%x\n",test(y));
-    //printf("The number %d has %d ones in binary\n", x, bitcount(x));
+    printf("The number %d has %d ones in binary\n", a, bitcount2(a));
 
     return 0;
 }
 
-/* bitcount: count 1 bits in x */
-int bitcount(unsigned int x) {
+int bitcount2 (unsigned int x){
     
     int b;
 
-    for (b = 0; x != 0; x >>= 1)
-	if (x & 01)
-	    b++;
-
+    for (b = 0; x != 0; x &= (x - 1))
+        b++;
     return b;
-}
-
-char test(char a){
-    
-    return  (a &= (a-1));
 }
