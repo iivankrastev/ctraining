@@ -11,16 +11,11 @@ unsigned char invert (unsigned char x,
 		      unsigned char p,
 		      unsigned char n);
 
-
-unsigned char getbits(unsigned char x,
-		      unsigned char p,
-		      unsigned char n);
-
 int main (void){
     
-    unsigned char a = 0xffu;
+    unsigned char a = 0xe9u;
 
-    printf("%x\n",invert(a,6,7));
+    printf("%x\n",invert(a,6,4));
 
     return 0;
 }
@@ -28,28 +23,28 @@ int main (void){
 unsigned char invert (unsigned char x,
 		      unsigned char p,
 		      unsigned char n){
- 
-    unsigned char a, b, c, d, e, f, y, w, z;
     
-    if (p < 0 || p > 7)			    /*if position is out of range*/
-	y = 'Z';
-
-    if (p < (n + 2))			    /*if desired bits are out of range*/
-	y = 'Z';
-
-
-    w = x & (0xffu << (p + 1));		    
-    z = x & (0xffu >> (8 - (p + 1) + n));  
+    const unsigned char mask_left = (0xffu << (p + 1)),
+			mask_right = (0xffu >> (8 - (p + 1) + n)),
+			shift_const = (p + 1 - n);
+    unsigned char a, t;
     
-    a = x >> (p + 1 - n);		    
-    b = ~(0xffu << n);			    
-    c = a & b;				    
-    d = (~c) & b;	
-    e = d << (p + 1 - n);
+    if (p > 7){					    
+	printf("Invalid position!\n");
+	return 1;
+    }
 
-    y = w | z | e;
+    if (p < (n - 1)){				    
+	printf("Invalid field of bits!\n");
+	return 2;
+    }
 
-    return y;
+    t = (x & mask_left) | (x & mask_right);    
+    x >>= shift_const;
+    a = ~x & ~(0xffu << n);
+    a <<= shift_const; 
+
+    return (t | a);
 }
 
 
