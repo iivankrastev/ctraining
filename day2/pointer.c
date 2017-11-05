@@ -6,7 +6,7 @@ int main(void){
     long l;
     int *p = &i;
 
-    printf("%d %d %d %d\n",
+    printf("%d %d %d %lu\n",
 	    sizeof (i), sizeof (l),
 	    sizeof (p), sizeof (*p));
     return 0;

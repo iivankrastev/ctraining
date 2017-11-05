@@ -11,7 +11,7 @@ int main(void){
     struct t tt0, tt1, *pt; 
     
     pt=&tt0;
-
+    
     pt->a=0;
     pt->b=1;
 

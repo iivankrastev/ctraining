@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+/*
 int main(int argc, char *argv[]){
     
     int i;
@@ -14,3 +16,20 @@ int main(int argc, char *argv[]){
 
     return 0;
 }
+*/
+
+int main (void){
+    
+    int i;
+    int sum =0;
+    char *s = "kurec";
+    /*
+    for(i=0;s[i];i++){
+	sum +=atoi(&s[i]);
+    }
+    */
+    printf("String : %s\t Value: %d\n", s, atoi(s));
+
+    return 0;
+}
+

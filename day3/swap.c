@@ -18,12 +18,24 @@ int main(void){
 
 void xchg (int *t0, int *t1){
 
-    int t;
+    //int *p = (int *)calloc(1,sizeof(int));
+    int *p = (int *)malloc(sizeof(int));
 
+    printf ("pointer p addr : %p\n", p);
+    printf ("pointer p value : %d\n", *p);
+    *p = *t0;
+    printf ("pointer p addr : %p\n", p);
+    printf ("pointer p value : %d\n", *p);
+    *t0 = *t1;
+    *t1 = *p;
+    printf ("pointer p addr : %p\n", p);
+    printf ("pointer p value : %d\n", *p);
+    /*
+    int t;
     t = *t0;
     *t0 = *t1;
     *t1 = t;
-        
+    */  
     return;
 
 }
