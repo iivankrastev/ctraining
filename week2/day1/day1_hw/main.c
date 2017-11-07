@@ -12,12 +12,16 @@ int main (void){
     short int i; 
 
     init(&fir, FIR_LEN);
+    
+    //print_coefs();
 
+    
     while (!feof(stdin)){
 	scanf("%hd", &i);
 	push(&fir, i);
 	filter32(&fir);
     }
+    
 
     return 0;
 

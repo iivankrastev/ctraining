@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define FIR32 32
+
+short int coefs [FIR32] = 
+    {0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 1,
+     1, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0};
+
 int init (ringbuf *ring, int N){
 
     ring->buf = (short int *)calloc(N, sizeof(short int));
@@ -23,25 +31,37 @@ void push (ringbuf *r, short int d){
 
 void filter32 (ringbuf *r){
     
-    static int j = 32;
-    int sum = 0;
+    static unsigned int j = (FIR32 - 1);
+    static int sum = 0; 
+    int i;
     
-    short int coefs [32] = 
-    {0, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 1,
-     1, 0, 0, 0, 0, 0, 0, 0,
-     0, 0, 0, 0, 0, 0, 0, 0};
-	
-    sum += (int)coefs[j] * (int)r->buf[r->idx];
-    (j == 0) ? j = 32 : j--;
+    if (r->idx != 0)
+	i = (r->idx - 1);
+    else
+	i = FIR32 - 1;
 
-    fprintf(stdout,"Element idx : %d coef: %d res : %d\n"
-			    , r->idx
+    	
+    sum += (int)coefs[j] * (int)r->buf[i];
+
+    fprintf(stdout,"idx : %d\t coef: %d\t coef value : %hd\t sum : %d\n"
+			    , i
 			    , j
+			    , coefs[j]
 			    , sum);
+
+    (j == 0) ? j = (FIR32 -1) : j--;
+
 
     return;
     
+}
+
+void print_coefs(){
+    
+    int i = 0;
+    for (i; i < FIR32; i++)
+	printf ("Index: %d Value: %hd\n", i, coefs[i]);
+    return;
 }
 
 
