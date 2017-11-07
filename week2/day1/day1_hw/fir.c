@@ -49,7 +49,11 @@ void filter32 (ringbuf *r){
 			    , coefs[j]
 			    , sum);
 
-    (j == 0) ? j = (FIR32 -1) : j--;
+    if (!j){ 
+	j = (FIR32 -1);
+	sum = 0;
+    } else 
+	j--;
 
 
     return;
