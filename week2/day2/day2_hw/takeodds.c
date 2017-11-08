@@ -36,11 +36,11 @@ int main (void){
 		(void)fputc((int)(buf_f1[i]),fx);
 	}
     }
-    
+    /*    
     printf("file1 length: %ld\n", ftell(f1));
     printf("file2 length: %ld\n", ftell(f2));
     printf("filex length: %ld\n", ftell(fx));
-    
+    */
     fclose(fx);
     fclose(f2);
     fclose(f1);
