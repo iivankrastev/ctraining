@@ -43,7 +43,7 @@ void filter32 (ringbuf *r){
     	
     sum += (int)coefs[j] * (int)r->buf[i];
 
-    fprintf(stdout,"idx : %d\t coef: %d\t coef value : %hd\t sum : %d\n"
+    fprintf(stdout,"idx : %d coef: %d\t coef value : %hd\t sum : %d\n"
 			    , i
 			    , j
 			    , coefs[j]
