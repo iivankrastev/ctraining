@@ -1,12 +1,20 @@
-#include <complex.h>
 #include <stdio.h>
+#include "complex.h"
 
 int main (void){
 
-    double a = 2.45;
+    complex z;
+    double a;
 
-    printf ("%lf\n",cexp(a));
+    Re(z) = 8.0;
+    Im(z) = 3.0;
 
+    //SINC(a, z);
+    SINC(a, z);
+    //LOGC(z);
+    //EXPC(z);
+    printf ("%lf\n", a); 
+    //printf ("(%lf + %lf)\n", Re(z), Im(z) );
 
     return 0;
 }
