@@ -89,12 +89,4 @@ typedef struct complex complex;
 	SCALE(Z, R); \
 } while (0)
 
-/***************HOMEWORK************************/
-
-#define ABSC(Z) sqrt(LEN(Z))
-
-#define EXPC(Z, R, Arg) ABSC(Z)*EULER(Z, R, Arg)
-
-
 #endif
-
