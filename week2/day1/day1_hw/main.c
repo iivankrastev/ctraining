@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define FIR_LEN 32
+#define FIR_LEN 16
 
 /*awk 'BEGIN { for(i = 0; i < 1000; i++) print i;}' |./fir*/
 
@@ -19,7 +19,7 @@ int main (void){
     while (!feof(stdin)){
 	scanf("%hd", &i);
 	push(&fir, i);
-	filter32(&fir);
+	filter16(&fir);
     }
     
 
