@@ -1,0 +1,34 @@
+nasko@gorgoroth:~/mk/queue_test$ ls -l
+total 6
+drwxr-xr-x   4 nasko    staff          5 Nov 10 14:55 queue_object
+-rw-r--r--   1 nasko    staff        711 Nov 10 15:00 queue_object_test.c
+nasko@gorgoroth:~/mk/queue_test$ cd queue_object
+nasko@gorgoroth:~/mk/queue_test/queue_object$ ls -l
+total 8
+drwxr-xr-x   2 nasko    staff          3 Nov 10 14:40 internal
+-rw-r--r--   1 nasko    staff        484 Nov 10 14:38 queue_object.h
+drwxr-xr-x   2 nasko    staff          3 Nov 10 14:41 src
+nasko@gorgoroth:~/mk/queue_test/queue_object$ cc -c -I. src/queue.c 
+nasko@gorgoroth:~/mk/queue_test/queue_object$ ls -l
+total 9
+drwxr-xr-x   2 nasko    staff          3 Nov 10 14:40 internal
+-rw-r--r--   1 nasko    staff        484 Nov 10 14:38 queue_object.h
+-rw-r--r--   1 nasko    staff       3176 Nov 10 15:06 queue.o
+drwxr-xr-x   2 nasko    staff          3 Nov 10 14:41 src
+nasko@gorgoroth:~/mk/queue_test/queue_object$ cd ..
+nasko@gorgoroth:~/mk/queue_test$ cc -Iqueue_object queue_object_test.c -o queue_object_test
+Undefined			first referenced
+ symbol  			    in file
+queue_create                        queue_object_test.o
+queue_destroy                       queue_object_test.o
+queue_put                           queue_object_test.o
+queue_get                           queue_object_test.o
+ld: fatal: symbol referencing errors
+nasko@gorgoroth:~/mk/queue_test$ cc -Iqueue_object queue_object_test.c queue_object/queue.o -o queue_object_test
+nasko@gorgoroth:~/mk/queue_test$ ls -l
+total 26
+drwxr-xr-x   4 nasko    staff          6 Nov 10 15:06 queue_object
+-rwxr-xr-x   1 nasko    staff       9512 Nov 10 15:08 queue_object_test
+-rw-r--r--   1 nasko    staff        711 Nov 10 15:00 queue_object_test.c
+nasko@gorgoroth:~/mk/queue_test$ 
+
