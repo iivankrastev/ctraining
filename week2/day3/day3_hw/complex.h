@@ -95,11 +95,22 @@ typedef struct complex complex;
 #define ABSC(Z) sqrt(LEN(Z))
 
 /*Cosine of complex number*/
-#define COSC(C, Z) ( C = ( cos(Re(Z)) * cosh(Im(Z)) ) )
+#define COSC(Z) do { \
+    double __t_Re, __t_Im; \
+    __t_Re = ( cos(Re(Z)) * cosh (Im(Z) ) ); \
+    __t_Im = ( sin(Re(Z)) * sinh (Im(Z) ) ); \
+    Re(Z) = __t_Re; \
+    Im(Z) = __t_Im; \
+} while (0)
 
 /*Sine of complex number*/
-#define SINC(C, Z) ( C = ( sin(Re(Z)) * cosh(Im(Z)) ) )
-
+#define SINC(Z) do { \
+    double __t_Re, __t_Im; \
+    __t_Re = ( sin(Re(Z)) * cosh (Im(Z) ) ); \
+    __t_Im = ( cos(Re(Z)) * sinh (Im(Z) ) ); \
+    Re(Z) = __t_Re; \
+    Im(Z) = __t_Im; \
+} while (0)
 /*Logaritm of complex number*/
 #define LOGC(Z) do { \
     double __t_Re, __t_Im; \
