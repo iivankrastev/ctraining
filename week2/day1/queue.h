@@ -8,8 +8,8 @@ struct list {
 typedef struct list list;
 
 struct queue {
-    list *B;
-    list *E;
+    list *head;
+    list *tail;
 };
 typedef struct queue queue;
 

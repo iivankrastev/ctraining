@@ -27,24 +27,22 @@ int main (void){
 }
 
 void init(queue *q){	
-    q->B = q->E = NULL;
+    q->head = q->tail = NULL;
     return;
 }
 
 int push(queue *q, int d){
     
-    list *newnode = (list*)malloc(sizeof(list));
-    if (!newnode) 
+    list *entry = (list*)malloc(sizeof(list));
+    if (!entry) 
 	return 0;
-    newnode->d = d;
-    newnode->n = NULL;
-    if (q->E) {
-	q->E->n = newnode;  
-	q->E = newnode;
-    } else {	
-	//if q->E is pointing to NULL
-	//Begin and End pointers is pointing at the same place
-	q->B = q->E = newnode;	
+    entry->d = d;
+    entry->n = NULL;
+    if (q->tail) {
+	q->tail->n = entry; // ??????????????????  
+	q->tail = entry;
+    } else {	/*Case in which this is the first pushed element in the queue*/	
+	q->head = q->tail = entry;	/*Both pointers point to it*/
     }
     
     return 1;
@@ -52,16 +50,17 @@ int push(queue *q, int d){
 
 int pop (queue *q, int *d){
    
-    list *t;	    //temporary var
+    list *temp;	    
 
-    if (!q->B)	    //if there's no list behind the queue
+    if (!q->head)   /* Case in which the queue is empty */	
 	return 0;
-    *d = q->B->d;   //saving the data 
-    t = q->B;	    //saving the b pointer
-    q->B = q->B->n; //pointing to next element
-    if (!q->B)
-	q->E = NULL;//if this was the last element 	
-    free(t);	    
+
+    *d = q->head->d;	    //saving the data 
+    temp = q->head;	    //saving the b pointer
+    q->head = q->head->n;   //pointing to next element
+    if (!q->head)
+	q->tail = NULL;	    //if this was the last element 	
+    free(temp);	    
 
     return 1;
 }

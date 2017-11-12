@@ -45,8 +45,8 @@ int add(list **root, int d){
 }
 
 int get (list **root, int *d){
-    list *tmp = *root;	/*To not lose root*/
-    if (!tmp)		/*If list is empty ->exit*/
+    list *tmp = *root;	
+    if (!tmp)	
 	return 0;
     *root = (*root)->n;
     *d = tmp->d;
