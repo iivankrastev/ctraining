@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "internal/queue.h"
 #include "queue_object.h"
@@ -59,5 +60,21 @@ int queue_get(void *_ctx, queue_datum *d) {
 	free(l);
 	
 	return 1;
+}
+
+int queue_search (void *_ctx,
+		  queue_datum_type dtype,
+		  queue_datum *d){
+    
+    while (queue_get(_ctx, d)){
+
+	if (d->type == dtype){
+	    printf("Type found\n");
+	    return 1; 
+	}
+    }
+    
+    printf("type not found\n");
+    return 0;
 }
 

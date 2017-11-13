@@ -26,7 +26,11 @@ int main(void) {
 		if (!queue_put(queue, d))
 			goto destructor;
 	}
+
 	
+	//(void)queue_search (queue, INTEGER, &d);
+	
+	/*
 	while (queue_get(queue, &d)) {
 		switch (d.type) {
 		case INTEGER:
@@ -40,6 +44,7 @@ int main(void) {
 			goto destructor;
 		}
 	}
+	*/
 	
 destructor:
 	queue_destroy(queue);
