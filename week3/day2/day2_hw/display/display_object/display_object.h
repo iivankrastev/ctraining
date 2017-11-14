@@ -8,5 +8,6 @@ void setpixel(void *, int, int, unsigned char);
 unsigned char getpixel(void *, int, int);
 void bresenham_line (void *, int, int, int, int);
 void bresenham_circle (void *, int, int, int);
+void bresenham_ellipse (void *, int, int, int, int);
 
 #endif
