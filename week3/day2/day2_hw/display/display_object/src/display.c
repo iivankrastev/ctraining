@@ -4,7 +4,7 @@
 #include "display_object.h"
 #include "internal/display.h"
 
-void *display_create(int M, int N){
+void *display_create(unsigned char *_d, int M, int N){
     
     display *d = (display *)malloc(sizeof(display));
 
@@ -12,7 +12,7 @@ void *display_create(int M, int N){
     
     d->rows = M;
     d->columns = N;
-    d->d = (unsigned char *)calloc(d->rows * d->columns, sizeof(unsigned char));
+    d->d = _d;
     
     return (void *)d;
 

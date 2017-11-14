@@ -8,24 +8,17 @@
 int main (void){
 
     void *display;
-    int x0, y0, x1, y1, xc, yc, r, rx, ry, i, j;
-    unsigned char pixel;
-    
-    x0 = ROWS/2;
-    y0 = COLUMNS/2;
-    x1 = ROWS;
-    y1 = COLUMNS;
-    xc = 20;
-    yc = 20;
-    rx = 20;
-    ry = 20;
-    r = 10;
+    int i, j;
+    unsigned char d[ROWS * COLUMNS], pixel;
 
-    display = display_create(ROWS, COLUMNS);
+    for (i = 0; i < (ROWS * COLUMNS); i++)
+	d[i] = 0u;
+
+    display = display_create(d, ROWS, COLUMNS);
     
-    //bresenham_line (display, x0, y0, x1, y1);
-    //bresenham_circle (display, x0, y0, r);
-    bresenham_ellipse (display, xc, yc, rx, ry);
+    bresenham_line (display, 0, 0, ROWS, COLUMNS);
+    bresenham_circle (display, ROWS/2, COLUMNS/2, 10);
+    bresenham_ellipse (display, ROWS/2, COLUMNS/2, 15, 15);
     
     for (i = 0; i < ROWS; i++) {
 	printf("|");
