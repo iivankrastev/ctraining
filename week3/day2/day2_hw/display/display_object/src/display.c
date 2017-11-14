@@ -28,12 +28,9 @@ void setpixel(void *_display, int x, int y, unsigned char value) {
     
     display *d = (display *)_display;
     
-   // printf("time to SET!\n");
     if ((x < 0) || (x >= d->rows)) return;
     if ((y < 0) || (y >= d->columns)) return;
-  //  printf("check COMPLETE\n"); 
     d->d[x * d->columns + y] = value;
-    printf("OK\n");
     return;
 }
 
@@ -59,13 +56,45 @@ void bresenham_line (void *_display, int x0, int y0, int x1, int y1){
     y = y0;
 
     for (x = 0; x < x1; x++){
-	//printf("before SET!\n");
 	setpixel(_display, x, y, 1);
-	printf("after SET");
 	if (D > 0){
 	    y = y + 1;
 	    D = D - 2 * dx;
 	}
 	D = D + 2 * dy;
+    }
+}
+
+void bresenham_circle (void *_display, int x0, int y0, int radius){
+
+    int x, y, dx, dy, err;
+    
+    x = radius - 1;
+    y = 0;
+    dx = 1;
+    dy = 1;
+    err = dx - (radius << 1);
+
+    while (x >= y) {
+        setpixel(_display, x0 + x, y0 + y, 1);
+        setpixel(_display, x0 + y, y0 + x, 1);
+	setpixel(_display, x0 - y, y0 + x, 1);
+        setpixel(_display, x0 - x, y0 + y, 1);
+        setpixel(_display, x0 - x, y0 - y, 1);
+        setpixel(_display, x0 - y, y0 - x, 1);
+        setpixel(_display, x0 + y, y0 - x, 1);
+        setpixel(_display, x0 + x, y0 - y, 1);
+
+        if (err <= 0) {
+            y++;
+            err += dy;
+            dy += 2;
+        }
+
+        if (err > 0) {
+            x--;
+            dx += 2;
+            err += (-radius << 1) + dx;
+        }
     }
 }
