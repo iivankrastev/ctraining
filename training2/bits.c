@@ -12,12 +12,10 @@ void setbit (uint32_t *i, int n, int val)
 
     return;
 }
-
-int getbit (uint32_t i, int n)
+/* Return bits in range */
+uint32_t getbits (uint32_t i, int from, int to)
 {
-    uint32_t mask = 1u << n;
-
-    return !!(i & mask);
+    return (i >> from) & ((1u << (to - from + 1u)) - 1u);
 }
 /* More generic */
 void setbool (uint32_t *i, int n, int val)
@@ -44,10 +42,13 @@ int main (void)
     uint32_t boolean[4];
     int j, k;
 
+    /*
     (void)memset(boolean, 0 , sizeof(boolean));
 
     for (j = 0; j < 128; j++)
 	setbool(boolean, j, 1);
+
+    */
 
     /* Sieve of Erathosthenes */
 /*
