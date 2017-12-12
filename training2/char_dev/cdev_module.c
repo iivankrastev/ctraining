@@ -4,6 +4,7 @@
 #include <linux/cdev.h>
 #include <linux/errno.h>
 #include <asm/uaccess.h>
+#include <linux/uaccess.h>
 
 #define HELLO_SIZE 128
 
@@ -34,12 +35,36 @@ static ssize_t cdev_write(struct file *file, const char *buf, size_t num, loff_t
 	return num;
 
 }
+static loff_t cdev_llseek(struct file *file, loff_t pos, int whence)
+{
+	loff_t newpos;
+
+	switch(whence) {
+		case 0: /* SEEK_SET */
+			newpos = pos;
+			break;
+		case 1: /* SEEK_CUR */
+			newpos = file->f_pos + pos;
+			break;
+		case 2: /* SEEK_END */
+			newpos = hello_len + pos;
+			break;
+		default: /* can't happen */
+			return -EINVAL;
+	}
+
+	if (newpos < 0) return -EINVAL;
+	file->f_pos = newpos;
+
+	return newpos;
+}
 
 static struct file_operations cdev_ops = 
 {
 	.owner	= THIS_MODULE,
 	.read	= &cdev_read,
 	.write	= &cdev_write,
+	.llseek = &cdev_llseek,
 };
 
 static const char *cdev_name = "our_cdev";

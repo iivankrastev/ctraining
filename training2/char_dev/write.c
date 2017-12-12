@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <linux/errno.h>
 #include <string.h>
+#include <unistd.h>
 
 #pragma pack(1)
 struct msg {
