@@ -1,0 +1,2 @@
+sudo mknod dev_name c major 0
+sudo chmod a+w dev_name

@@ -1,0 +1,1 @@
+cmd_/home/mms/ctraining/training2/char_dev/cdev_module.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/mms/ctraining/training2/char_dev/cdev_module.ko /home/mms/ctraining/training2/char_dev/cdev_module.o /home/mms/ctraining/training2/char_dev/cdev_module.mod.o
